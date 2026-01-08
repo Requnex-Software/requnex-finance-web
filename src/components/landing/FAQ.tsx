@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+import ScrollReveal from "./ScrollReveal";
 import {
   Accordion,
   AccordionContent,
@@ -34,34 +36,39 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="py-20 lg:py-32 bg-muted/50">
+    <section id="faq" className="py-20 lg:py-32 bg-muted/50 relative overflow-hidden">
       <div className="container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Frequently Asked{" "}
-            <span className="gradient-text">Questions</span>
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Got questions? We've got answers. If you can't find what you're looking for, 
-            feel free to reach out to us.
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+              Frequently Asked{" "}
+              <span className="gradient-text">Questions</span>
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Got questions? We've got answers. If you can't find what you're looking for, 
+              feel free to reach out to us.
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                className="bg-card rounded-xl border border-border/50 px-6 data-[state=open]:shadow-md transition-shadow"
-              >
-                <AccordionTrigger className="text-left font-semibold hover:no-underline py-6">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-6 leading-relaxed">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+              <ScrollReveal key={index} delay={index * 0.08} direction="up">
+                <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
+                  <AccordionItem
+                    value={`item-${index}`}
+                    className="bg-card rounded-xl border border-border/50 px-6 data-[state=open]:shadow-md transition-shadow"
+                  >
+                    <AccordionTrigger className="text-left font-semibold hover:no-underline py-6">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground pb-6 leading-relaxed">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
+              </ScrollReveal>
             ))}
           </Accordion>
         </div>

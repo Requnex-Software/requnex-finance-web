@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import ScrollReveal from "./ScrollReveal";
 import dashboardScreen from "@/assets/screen-dashboard.png";
 import analyticsScreen from "@/assets/screen-analytics.png";
 import goalsScreen from "@/assets/screen-goals.png";
@@ -45,7 +47,6 @@ const Screenshots = () => {
     setActiveIndex((prev) => (prev - 1 + screenshots.length) % screenshots.length);
   }, [screenshots.length]);
 
-  // Auto-advance carousel
   useEffect(() => {
     const interval = setInterval(nextSlide, 4000);
     return () => clearInterval(interval);
@@ -55,7 +56,6 @@ const Screenshots = () => {
     const diff = index - activeIndex;
     const normalizedDiff = ((diff + screenshots.length) % screenshots.length);
     
-    // Calculate position relative to active
     let offset = normalizedDiff;
     if (normalizedDiff > screenshots.length / 2) {
       offset = normalizedDiff - screenshots.length;
@@ -73,83 +73,93 @@ const Screenshots = () => {
   };
 
   return (
-    <section className="py-20 lg:py-32 overflow-hidden">
+    <section className="py-20 lg:py-32 overflow-hidden relative">
       <div className="container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Beautiful Design,{" "}
-            <span className="gradient-text">Powerful Features</span>
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Every screen is crafted to make managing your finances a delightful experience.
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+              Beautiful Design,{" "}
+              <span className="gradient-text">Powerful Features</span>
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Every screen is crafted to make managing your finances a delightful experience.
+            </p>
+          </div>
+        </ScrollReveal>
 
-        <div className="relative max-w-4xl mx-auto">
-          {/* Main carousel */}
-          <div className="flex items-center justify-center gap-4 lg:gap-8">
-            {/* Previous button */}
-            <button
-              onClick={prevSlide}
-              className="p-3 rounded-full bg-card border border-border shadow-md hover:bg-muted transition-colors z-20"
-              aria-label="Previous screenshot"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
+        <ScrollReveal delay={0.2}>
+          <div className="relative max-w-4xl mx-auto">
+            <div className="flex items-center justify-center gap-4 lg:gap-8">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={prevSlide}
+                className="p-3 rounded-full bg-card border border-border shadow-md hover:bg-muted transition-colors z-20"
+                aria-label="Previous screenshot"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </motion.button>
 
-            {/* Screenshots container */}
-            <div className="relative flex items-center justify-center h-[450px] sm:h-[530px] w-[280px] sm:w-[320px]">
-              {screenshots.map((screenshot, index) => (
-                <div
-                  key={index}
-                  className="absolute transition-all duration-500 ease-out"
-                  style={getSlideStyle(index)}
-                >
-                  <div className={`bg-foreground rounded-[2rem] p-1.5 shadow-xl ${index === activeIndex ? 'shadow-glow' : ''}`}>
-                    <div className="bg-background rounded-[1.75rem] overflow-hidden w-[200px] sm:w-[240px] h-[420px] sm:h-[500px]">
-                      <img
-                        src={screenshot.src}
-                        alt={screenshot.title}
-                        className="w-full h-full object-cover"
-                      />
+              <div className="relative flex items-center justify-center h-[450px] sm:h-[530px] w-[280px] sm:w-[320px]">
+                {screenshots.map((screenshot, index) => (
+                  <motion.div
+                    key={index}
+                    className="absolute"
+                    animate={getSlideStyle(index)}
+                    transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                  >
+                    <div className={`bg-foreground rounded-[2rem] p-1.5 shadow-xl ${index === activeIndex ? 'shadow-glow' : ''}`}>
+                      <div className="bg-background rounded-[1.75rem] overflow-hidden w-[200px] sm:w-[240px] h-[420px] sm:h-[500px]">
+                        <img
+                          src={screenshot.src}
+                          alt={screenshot.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={nextSlide}
+                className="p-3 rounded-full bg-card border border-border shadow-md hover:bg-muted transition-colors z-20"
+                aria-label="Next screenshot"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </motion.button>
             </div>
 
-            {/* Next button */}
-            <button
-              onClick={nextSlide}
-              className="p-3 rounded-full bg-card border border-border shadow-md hover:bg-muted transition-colors z-20"
-              aria-label="Next screenshot"
+            <motion.div
+              className="text-center mt-10"
+              key={activeIndex}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
             >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
+              <h3 className="text-xl font-bold mb-2">{screenshots[activeIndex].title}</h3>
+              <p className="text-muted-foreground">{screenshots[activeIndex].description}</p>
+            </motion.div>
 
-          {/* Caption */}
-          <div className="text-center mt-10">
-            <h3 className="text-xl font-bold mb-2">{screenshots[activeIndex].title}</h3>
-            <p className="text-muted-foreground">{screenshots[activeIndex].description}</p>
+            <div className="flex justify-center gap-2 mt-6">
+              {screenshots.map((_, index) => (
+                <motion.button
+                  key={index}
+                  whileHover={{ scale: 1.2 }}
+                  onClick={() => setActiveIndex(index)}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    index === activeIndex
+                      ? "w-8 bg-primary"
+                      : "w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                  }`}
+                  aria-label={`Go to screenshot ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
-
-          {/* Dots indicator */}
-          <div className="flex justify-center gap-2 mt-6">
-            {screenshots.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
-                  index === activeIndex
-                    ? "w-8 bg-primary"
-                    : "w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                }`}
-                aria-label={`Go to screenshot ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
