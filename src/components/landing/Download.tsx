@@ -6,7 +6,7 @@ import ScrollReveal from "./ScrollReveal";
 const DownloadSection = () => {
   const requirements = [
     "Android 8.0 or higher",
-    "~50 MB storage space",
+    "~136 MB storage space",
     "Internet connection for exchange rates",
   ];
 
@@ -56,7 +56,7 @@ const DownloadSection = () => {
                       Version 1.0.0
                     </span>
                     <span>•</span>
-                    <span>~50 MB</span>
+                    <span>~136 MB</span>
                   </div>
 
                   <div className="space-y-2">

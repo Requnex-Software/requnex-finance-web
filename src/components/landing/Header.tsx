@@ -34,7 +34,7 @@ const Header = () => {
           <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center overflow-hidden border border-border">
             {/* Logo placeholder - replace src with your logo */}
             <img 
-              src="/logo.png" 
+              src="/logo-png.png" 
               alt="Requnex Finance Logo" 
               className="w-full h-full object-contain"
               onError={(e) => {

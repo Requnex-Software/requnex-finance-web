@@ -30,7 +30,7 @@ const Features = () => {
     {
       icon: Shield,
       title: "Security First",
-      description: "4-digit PIN, biometric authentication, and local data encryption.",
+      description: "4-digit PIN, biometric authentication, and Firestore data encryption.",
       color: "bg-accent/10 text-accent",
     },
     {

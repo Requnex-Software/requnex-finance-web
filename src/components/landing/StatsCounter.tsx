@@ -11,10 +11,10 @@ interface StatItem {
 }
 
 const stats: StatItem[] = [
-  { icon: Download, value: 5000, suffix: "+", label: "Downloads" },
+  { icon: Download, value: 0, suffix: "", label: "Downloads" },
   { icon: Users, value: 40, suffix: "+", label: "Currencies" },
   { icon: Globe, value: 10, suffix: "+", label: "Countries" },
-  { icon: Star, value: 4.8, suffix: "", label: "Rating" },
+  { icon: Star, value: 0, suffix: "", label: "Rating" },
 ];
 
 const Counter = ({ value, suffix, isVisible }: { value: number; suffix: string; isVisible: boolean }) => {

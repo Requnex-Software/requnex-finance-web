@@ -15,8 +15,8 @@ const Footer = () => {
       { label: "Terms of Service", href: "/terms" },
     ],
     social: [
-      { icon: Mail, href: "mailto:hello@requnex.com", label: "Email" },
-      { icon: Github, href: "https://github.com/requnex", label: "GitHub" },
+      { icon: Mail, href: "mailto:requnexsoftware@gmail.com", label: "Email" },
+      { icon: Github, href: "https://github.com/levk1s", label: "GitHub" },
       { icon: Twitter, href: "https://twitter.com/requnex", label: "Twitter" },
     ],
   };
@@ -31,7 +31,7 @@ const Footer = () => {
               <div className="w-10 h-10 rounded-xl bg-background/10 flex items-center justify-center overflow-hidden border border-background/20">
                 {/* Logo placeholder - replace src with your logo */}
                 <img 
-                  src="/logo.png" 
+                  src="/logo-png.png" 
                   alt="Requnex Finance Logo" 
                   className="w-full h-full object-contain"
                   onError={(e) => {

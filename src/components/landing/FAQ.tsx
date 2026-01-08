@@ -19,7 +19,7 @@ const FAQ = () => {
     },
     {
       question: "Is my financial data secure?",
-      answer: "Absolutely. Your data is encrypted locally on your device using industry-standard encryption. We don't have access to your financial information – it never leaves your phone. You can also protect the app with a PIN or biometric authentication.",
+      answer: "Absolutely. Your data is securely stored in Google Firestore using industry-standard encryption. We do not have access to your financial information, and all data is protected by Google’s security infrastructure. You can also protect the app with a PIN or biometric authentication.",
     },
     {
       question: "What currencies are supported?",
@@ -27,7 +27,7 @@ const FAQ = () => {
     },
     {
       question: "How do I backup my data?",
-      answer: "Currently, data is stored locally on your device. We're working on cloud backup and sync features for a future update. In the meantime, make sure to keep your phone backed up through your system's backup service.",
+      answer: "Currently, your data is securely stored in Google Firestore. We are continuously improving our cloud backup and synchronization features to ensure seamless access across devices. Your data is protected by Google’s infrastructure and industry-standard security measures.",
     },
     {
       question: "Will there be an iOS version?",
