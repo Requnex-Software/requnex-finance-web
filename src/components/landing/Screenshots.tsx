@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import dashboardScreen from "@/assets/screen-dashboard.png";
 import analyticsScreen from "@/assets/screen-analytics.png";
@@ -37,12 +37,39 @@ const Screenshots = () => {
     },
   ];
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % screenshots.length);
-  };
+  }, [screenshots.length]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setActiveIndex((prev) => (prev - 1 + screenshots.length) % screenshots.length);
+  }, [screenshots.length]);
+
+  // Auto-advance carousel
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 4000);
+    return () => clearInterval(interval);
+  }, [nextSlide]);
+
+  const getSlideStyle = (index: number) => {
+    const diff = index - activeIndex;
+    const normalizedDiff = ((diff + screenshots.length) % screenshots.length);
+    
+    // Calculate position relative to active
+    let offset = normalizedDiff;
+    if (normalizedDiff > screenshots.length / 2) {
+      offset = normalizedDiff - screenshots.length;
+    }
+    
+    const isActive = index === activeIndex;
+    const isVisible = Math.abs(offset) <= 1;
+    
+    return {
+      transform: `translateX(${offset * 140}px) scale(${isActive ? 1 : 0.8})`,
+      opacity: isVisible ? (isActive ? 1 : 0.4) : 0,
+      zIndex: isActive ? 10 : 5 - Math.abs(offset),
+      pointerEvents: isActive ? 'auto' as const : 'none' as const,
+    };
   };
 
   return (
@@ -64,53 +91,37 @@ const Screenshots = () => {
             {/* Previous button */}
             <button
               onClick={prevSlide}
-              className="p-3 rounded-full bg-card border border-border shadow-md hover:bg-muted transition-colors"
+              className="p-3 rounded-full bg-card border border-border shadow-md hover:bg-muted transition-colors z-20"
               aria-label="Previous screenshot"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
 
             {/* Screenshots container */}
-            <div className="relative flex items-center justify-center">
-              {screenshots.map((screenshot, index) => {
-                const offset = index - activeIndex;
-                const isActive = index === activeIndex;
-                
-                return (
-                  <div
-                    key={index}
-                    className="absolute transition-all duration-500 ease-out"
-                    style={{
-                      transform: `translateX(${offset * 120}px) scale(${isActive ? 1 : 0.75})`,
-                      opacity: Math.abs(offset) > 1 ? 0 : isActive ? 1 : 0.5,
-                      zIndex: isActive ? 10 : 5 - Math.abs(offset),
-                    }}
-                  >
-                    <div className={`bg-foreground rounded-[2rem] p-1.5 shadow-xl ${isActive ? 'shadow-glow' : ''}`}>
-                      <div className="bg-background rounded-[1.75rem] overflow-hidden w-[200px] sm:w-[240px] h-[420px] sm:h-[500px]">
-                        <img
-                          src={screenshot.src}
-                          alt={screenshot.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+            <div className="relative flex items-center justify-center h-[450px] sm:h-[530px] w-[280px] sm:w-[320px]">
+              {screenshots.map((screenshot, index) => (
+                <div
+                  key={index}
+                  className="absolute transition-all duration-500 ease-out"
+                  style={getSlideStyle(index)}
+                >
+                  <div className={`bg-foreground rounded-[2rem] p-1.5 shadow-xl ${index === activeIndex ? 'shadow-glow' : ''}`}>
+                    <div className="bg-background rounded-[1.75rem] overflow-hidden w-[200px] sm:w-[240px] h-[420px] sm:h-[500px]">
+                      <img
+                        src={screenshot.src}
+                        alt={screenshot.title}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   </div>
-                );
-              })}
-              
-              {/* Static center phone for layout */}
-              <div className="opacity-0 pointer-events-none">
-                <div className="bg-foreground rounded-[2rem] p-1.5">
-                  <div className="bg-background rounded-[1.75rem] w-[200px] sm:w-[240px] h-[420px] sm:h-[500px]" />
                 </div>
-              </div>
+              ))}
             </div>
 
             {/* Next button */}
             <button
               onClick={nextSlide}
-              className="p-3 rounded-full bg-card border border-border shadow-md hover:bg-muted transition-colors"
+              className="p-3 rounded-full bg-card border border-border shadow-md hover:bg-muted transition-colors z-20"
               aria-label="Next screenshot"
             >
               <ChevronRight className="w-6 h-6" />
@@ -129,10 +140,10 @@ const Screenshots = () => {
               <button
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                className={`h-2.5 rounded-full transition-all duration-300 ${
                   index === activeIndex
                     ? "w-8 bg-primary"
-                    : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                    : "w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
                 }`}
                 aria-label={`Go to screenshot ${index + 1}`}
               />

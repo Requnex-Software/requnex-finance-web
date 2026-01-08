@@ -28,10 +28,19 @@ const Footer = () => {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl gradient-hero flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">R</span>
+              <div className="w-10 h-10 rounded-xl bg-background/10 flex items-center justify-center overflow-hidden border border-background/20">
+                {/* Logo placeholder - replace src with your logo */}
+                <img 
+                  src="/logo.png" 
+                  alt="Requnex Finance Logo" 
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.parentElement!.innerHTML = '<span class="text-background font-bold text-xl">R</span>';
+                  }}
+                />
               </div>
-              <span className="font-bold text-xl">Requnex</span>
+              <span className="font-bold text-xl">Requnex Finance</span>
             </div>
             <p className="text-background/70 leading-relaxed mb-6">
               Your personal finance companion. Track expenses, save smarter, and achieve your financial goals.

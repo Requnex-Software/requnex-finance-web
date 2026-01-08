@@ -17,7 +17,7 @@ const Header = () => {
   const navLinks = [
     { href: "#features", label: "Features" },
     { href: "#how-it-works", label: "How It Works" },
-    { href: "#testimonials", label: "Reviews" },
+    { href: "#download", label: "Download" },
     { href: "#faq", label: "FAQ" },
   ];
 
@@ -31,10 +31,19 @@ const Header = () => {
     >
       <div className="container flex items-center justify-between">
         <a href="#" className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl gradient-hero flex items-center justify-center shadow-glow">
-            <span className="text-primary-foreground font-bold text-xl">R</span>
+          <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center overflow-hidden border border-border">
+            {/* Logo placeholder - replace src with your logo */}
+            <img 
+              src="/logo.png" 
+              alt="Requnex Finance Logo" 
+              className="w-full h-full object-contain"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                e.currentTarget.parentElement!.innerHTML = '<span class="text-primary font-bold text-xl">R</span>';
+              }}
+            />
           </div>
-          <span className="font-bold text-xl text-foreground">Requnex</span>
+          <span className="font-bold text-xl text-foreground">Requnex Finance</span>
         </a>
 
         {/* Desktop Navigation */}

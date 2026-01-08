@@ -31,7 +31,7 @@ const DownloadSection = () => {
               </p>
 
               {/* Download buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4">
                 <Button variant="hero" size="xl" asChild>
                   <a href="https://expo.dev/accounts/requnexsoftware/projects/requnex-finance/builds" target="_blank" rel="noopener noreferrer">
                     <Download className="w-5 h-5" />
@@ -43,6 +43,11 @@ const DownloadSection = () => {
                   iOS Coming Q2 2026
                 </Button>
               </div>
+              
+              {/* Google Play note */}
+              <p className="text-sm text-muted-foreground mb-8 text-center lg:text-left">
+                🎮 Google Play version coming soon! For now, download the APK directly.
+              </p>
 
               {/* Version info */}
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start text-sm text-muted-foreground mb-6">
