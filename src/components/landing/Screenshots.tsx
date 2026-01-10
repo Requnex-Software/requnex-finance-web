@@ -2,11 +2,11 @@ import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
-import dashboardScreen from "@/assets/screen-dashboard.png";
-import analyticsScreen from "@/assets/screen-analytics.png";
-import goalsScreen from "@/assets/screen-goals.png";
-import transactionScreen from "@/assets/screen-transaction.png";
-import settingsScreen from "@/assets/screen-settings.png";
+import dashboardScreen from "@/assets/dashboard.jpg";
+import analyticsScreen from "@/assets/analytic.jpg";
+import goalsScreen from "@/assets/goals.jpg";
+import transactionScreen from "@/assets/add.jpg";
+import settingsScreen from "@/assets/settings.jpg";
 
 const Screenshots = () => {
   const [activeIndex, setActiveIndex] = useState(0);

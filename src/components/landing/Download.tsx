@@ -34,11 +34,16 @@ const DownloadSection = () => {
                   <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4">
                     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                       <Button variant="hero" size="xl" asChild>
-                        <a href="https://expo.dev/accounts/requnexsoftware/projects/requnex-finance/builds" target="_blank" rel="noopener noreferrer">
-                          <Download className="w-5 h-5" />
-                          Download APK
-                        </a>
-                      </Button>
+  <a
+    href="/requnex-finance-v1.0.0.apk"
+    download
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Download className="w-5 h-5" />
+    Download APK
+  </a>
+</Button>
                     </motion.div>
                     <Button variant="disabled" size="xl" disabled>
                       <Apple className="w-5 h-5" />
@@ -83,68 +88,20 @@ const DownloadSection = () => {
                     whileHover={{ scale: 1.02, rotate: 1 }}
                     className="bg-background p-8 rounded-2xl shadow-lg border border-border"
                   >
-                    <div className="text-center mb-6">
+                    {/*<div className="text-center mb-6">
                       <QrCode className="w-12 h-12 mx-auto text-primary mb-2" />
                       <p className="font-semibold">Scan to Download</p>
                       <p className="text-sm text-muted-foreground">Point your camera at the QR code</p>
-                    </div>
-                    <div className="w-48 h-48 bg-foreground rounded-xl flex items-center justify-center mx-auto">
-                      <svg viewBox="0 0 200 200" className="w-40 h-40">
-                        <rect x="0" y="0" width="200" height="200" fill="white" />
-                        <g fill="black">
-                          <rect x="10" y="10" width="60" height="60" />
-                          <rect x="20" y="20" width="40" height="40" fill="white" />
-                          <rect x="30" y="30" width="20" height="20" />
-                          
-                          <rect x="130" y="10" width="60" height="60" />
-                          <rect x="140" y="20" width="40" height="40" fill="white" />
-                          <rect x="150" y="30" width="20" height="20" />
-                          
-                          <rect x="10" y="130" width="60" height="60" />
-                          <rect x="20" y="140" width="40" height="40" fill="white" />
-                          <rect x="30" y="150" width="20" height="20" />
-                          
-                          <rect x="80" y="10" width="10" height="10" />
-                          <rect x="100" y="10" width="10" height="10" />
-                          <rect x="80" y="30" width="10" height="10" />
-                          <rect x="110" y="30" width="10" height="10" />
-                          <rect x="80" y="50" width="10" height="10" />
-                          <rect x="90" y="50" width="10" height="10" />
-                          <rect x="110" y="50" width="10" height="10" />
-                          
-                          <rect x="80" y="80" width="40" height="40" />
-                          
-                          <rect x="10" y="80" width="10" height="10" />
-                          <rect x="30" y="80" width="10" height="10" />
-                          <rect x="50" y="80" width="10" height="10" />
-                          <rect x="10" y="100" width="10" height="10" />
-                          <rect x="40" y="100" width="10" height="10" />
-                          <rect x="60" y="100" width="10" height="10" />
-                          
-                          <rect x="130" y="80" width="10" height="10" />
-                          <rect x="150" y="80" width="10" height="10" />
-                          <rect x="170" y="80" width="10" height="10" />
-                          <rect x="140" y="100" width="10" height="10" />
-                          <rect x="160" y="100" width="10" height="10" />
-                          <rect x="180" y="100" width="10" height="10" />
-                          
-                          <rect x="80" y="130" width="10" height="10" />
-                          <rect x="100" y="130" width="10" height="10" />
-                          <rect x="110" y="150" width="10" height="10" />
-                          <rect x="80" y="170" width="10" height="10" />
-                          <rect x="100" y="170" width="10" height="10" />
-                          
-                          <rect x="130" y="130" width="10" height="10" />
-                          <rect x="150" y="130" width="10" height="10" />
-                          <rect x="170" y="130" width="10" height="10" />
-                          <rect x="140" y="150" width="10" height="10" />
-                          <rect x="160" y="150" width="10" height="10" />
-                          <rect x="130" y="170" width="10" height="10" />
-                          <rect x="150" y="170" width="10" height="10" />
-                          <rect x="180" y="170" width="10" height="10" />
-                        </g>
-                      </svg>
-                    </div>
+                    </div>*/}
+                    <div className="text-center mb-6">
+  <img
+    src="/qr.png" // <- твій файл у public папці
+    alt="QR Code"
+    className="w-48 h-full mx-auto rounded-xl"
+  />
+  <p className="font-semibold mt-2">Scan to Download</p>
+  <p className="text-sm text-muted-foreground">Point your camera at the QR code</p>
+</div>
                   </motion.div>
                 </div>
               </ScrollReveal>

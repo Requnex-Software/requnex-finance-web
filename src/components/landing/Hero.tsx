@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Download, Apple, Shield, Sparkles, BadgeCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import FloatingParticles from "./FloatingParticles";
-import heroPhone from "@/assets/hero-phone.png";
+import heroPhone from "@/assets/dashboard.jpg";
 
 const Hero = () => {
   const trustBadges = [
@@ -44,7 +44,6 @@ const Hero = () => {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6"
             >
-              <Sparkles className="w-4 h-4" />
               <span className="text-sm font-medium">Personal Finance Made Simple</span>
             </motion.div>
 
@@ -139,7 +138,7 @@ const Hero = () => {
                   <img
                     src={heroPhone}
                     alt="Requnex Finance App Dashboard"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover mt-[10px]"
                   />
                 </div>
               </motion.div>
