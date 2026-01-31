@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Download } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,6 +23,19 @@ const Header = () => {
     { href: "#faq", label: "FAQ" },
   ];
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNav = (hash: string) => {
+    const id = hash.replace('#', '');
+    if (location.pathname === '/') {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    navigate('/' + hash);
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -30,7 +45,7 @@ const Header = () => {
       }`}
     >
       <div className="container flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center overflow-hidden border border-border">
             {/* Logo placeholder - replace src with your logo */}
             <img 
@@ -44,27 +59,26 @@ const Header = () => {
             />
           </div>
           <span className="font-bold text-xl text-foreground">Requnex Finance</span>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.href}
-              href={link.href}
+              type="button"
+              onClick={() => handleNav(link.href)}
               className="text-muted-foreground hover:text-foreground transition-colors font-medium"
             >
               {link.label}
-            </a>
+            </button>
           ))}
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <Button variant="hero" size="default" asChild>
-            <a href="#download">
-              <Download className="w-4 h-4" />
-              Download APK
-            </a>
+          <Button variant="hero" size="default" onClick={() => handleNav('#download')}>
+            <Download className="w-4 h-4" />
+            Download APK
           </Button>
         </div>
 
@@ -82,20 +96,21 @@ const Header = () => {
         <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border animate-fade-in">
           <nav className="container py-6 flex flex-col gap-4">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.href}
-                href={link.href}
-                className="text-foreground hover:text-primary transition-colors font-medium py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
+                type="button"
+                onClick={() => {
+                  handleNav(link.href);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
-            <Button variant="hero" size="lg" className="mt-4" asChild>
-              <a href="#download">
-                <Download className="w-4 h-4" />
-                Download APK
-              </a>
+            <Button variant="hero" size="lg" className="mt-4" onClick={() => { handleNav('#download'); setIsMobileMenuOpen(false); }}>
+              <Download className="w-4 h-4" />
+              Download APK
             </Button>
           </nav>
         </div>
